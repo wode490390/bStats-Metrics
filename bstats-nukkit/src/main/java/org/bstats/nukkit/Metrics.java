@@ -11,6 +11,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+
+import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -32,7 +34,6 @@ import java.util.TimerTask;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.zip.GZIPOutputStream;
-import javax.net.ssl.HttpsURLConnection;
 
 /**
  * bStats collects some data for plugin authors.
@@ -231,6 +232,7 @@ public class Metrics {
         int playerAmount = Server.getInstance().getOnlinePlayers().size();
         int onlineMode = Server.getInstance().getPropertyBoolean("xbox-auth", false) ? 1 : 0;
         String minecraftVersion = Server.getInstance().getVersion();
+        String softwareName = Server.getInstance().getName();
 
         // OS/Java specific data
         String javaVersion = System.getProperty("java.version");
@@ -246,6 +248,7 @@ public class Metrics {
         data.addProperty("playerAmount", playerAmount);
         data.addProperty("onlineMode", onlineMode);
         data.addProperty("bukkitVersion", minecraftVersion);
+        data.addProperty("bukkitName", softwareName);
 
         data.addProperty("javaVersion", javaVersion);
         data.addProperty("osName", osName);
