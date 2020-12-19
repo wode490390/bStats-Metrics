@@ -4,20 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.bstats</groupId>
-    <artifactId>bstats-nukkit</artifactId>
-    <version>1.7</version>
+    <parent>
+        <artifactId>bstats</artifactId>
+        <groupId>org.bstats</groupId>
+        <version>1.8</version>
+    </parent>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
+    <artifactId>bstats-nukkit</artifactId>
 
     <repositories>
         <repository>
-            <id>nukkitx-repo</id>
-            <url>http://repo.nukkitx.com/main/</url>
+            <id>opencollab-repo-snapshot</id>
+            <url>https://repo.opencollab.dev/maven-snapshots/</url>
         </repository>
     </repositories>
 
