@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 import java.util.zip.GZIPOutputStream;
 
@@ -47,9 +48,12 @@ public class MetricsLite {
         }
     }
 
+    // This ThreadFactory enforces the naming convention for our Threads
+    private final ThreadFactory threadFactory = task -> new Thread(task, "bStats-Metrics");
+
     // Executor service for requests
     // We use an executor service because the Nukkit scheduler is affected by server lags
-    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1, threadFactory);
 
     // The version of this bStats class
     public static final int B_STATS_VERSION = 1;
@@ -97,7 +101,6 @@ public class MetricsLite {
         } catch (IOException e) {
             // Failed to load configuration
             plugin.getLogger().warning("Failed to load bStats config!", e);
-            return;
         }
 
         if (enabled) {
